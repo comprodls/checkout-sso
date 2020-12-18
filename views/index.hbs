@@ -1,3 +1,4 @@
+{{!-- <script type="text/javascript" src="https://cdns.gigya.com/js/gigya.js?apiKey=<API-key>"></script> --}}
 <div class="mt-4">
   <h1 class="">Cambridge Shared Checkout</h1>
   <p class="">You are currently not logged in.</p>
@@ -5,6 +6,11 @@
 </div>
 <script>
   function login(){
-    window.location.href = "https://proxy.qa.internal.sso.cambridge.org/login";
+    //window.location.href = "https://proxy.qa.internal.sso.cambridge.org/login";
+    var newNonce = Math.random()*1000;
+    // https://openid.qa.sso.cambridge.org/oidc/op/v1.0/3_H1l5oAZovYR72SpJuqq3US0WyzJyWBKEB8PasZUEBN1t7ESpbdM6pFND3Y8BRmit;
+
+    var authorizeEndpointLink="https://openid.qa.sso.cambridge.org/oidc/op/v1.0/3_H1l5oAZovYR72SpJuqq3US0WyzJyWBKEB8PasZUEBN1t7ESpbdM6pFND3Y8BRmit/authorize?client_id=3IXNoM2b2SXE-Trwe284aKwZ&response_type=code&redirect_uri=https://cambridge-checkout.comprodls.com/&scope=openid%20email%20profile&nonce=" + newNonce;
+    window.location.href = authorizeEndpointLink;
   }
 </script>
