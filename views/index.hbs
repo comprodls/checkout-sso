@@ -1,16 +1,66 @@
-{{!-- <script type="text/javascript" src="https://cdns.gigya.com/js/gigya.js?apiKey=<API-key>"></script> --}}
+<script type="text/javascript"
+  src="https://cdns.gigya.com/js/gigya.js?apiKey=3_1vToYYw9suF1Gfm5VX9uNURUj6IMqRQq1_3YLsxOXx9vmUSkQQrndcLkYr4CIxYd">
+</script>
+
 <div class="mt-4">
-  <h1 class="">Cambridge Shared Checkout</h1>
-  <p class="">You are currently not logged in.</p>
-  <button onclick="login()">Login</button>
+  <h1>Cambridge Shared Checkout</h1>
+  <div class="no-session d-none">
+    <p>You are currently not logged in.</p>
+    <button onclick="login()">Login</button>
+  </div>
+  <div class="logged-in">
+    <button class="logout d-none" onclick="logout()">Logout</button>
+    <pre id="user-info">
+    </pre>
+  </div>
 </div>
+
 <script>
-  function login(){
+  function login() {
     //window.location.href = "https://proxy.qa.internal.sso.cambridge.org/login";
-    var newNonce = Math.random()*1000;
+    var newNonce = Math.random() * 1000;
     // https://openid.qa.sso.cambridge.org/oidc/op/v1.0/3_H1l5oAZovYR72SpJuqq3US0WyzJyWBKEB8PasZUEBN1t7ESpbdM6pFND3Y8BRmit;
 
-    var authorizeEndpointLink="https://openid.qa.sso.cambridge.org/oidc/op/v1.0/3_H1l5oAZovYR72SpJuqq3US0WyzJyWBKEB8PasZUEBN1t7ESpbdM6pFND3Y8BRmit/authorize?client_id=3IXNoM2b2SXE-Trwe284aKwZ&response_type=code&redirect_uri=https://cambridge-checkout.comprodls.com/&scope=openid%20email%20profile&nonce=" + newNonce;
+    var authorizeEndpointLink = "https://openid.dev.sso.cambridge.org/oidc/op/v1.0/3_g0VqF7c6mmN3KYJCiEMdJOLF_lKb3h0qiXK6Uf1P17tLrbXpfY-P7ayDwBPIdFNR/authorize?client_id=lcCkTux5TS-3K8eC7zWR6zl&response_type=code&redirect_uri=https://cambridge-checkout.comprodls.com/&scope=openid%20email%20profile&nonce=" + newNonce;
+
     window.location.href = authorizeEndpointLink;
   }
+
+
+  function onGigyaServiceReady() {
+    gigya.accounts.getAccountInfo({
+      callback: main
+    })
+    gigya.accounts.addEventHandlers({
+      onLogin: loggedIn
+    });
+  }
+
+  function logout() {
+    gigya.accounts.logout({
+      callback: () => {
+        document.querySelector(".logged-in").classList.add("d-none")
+        document.querySelector(".no-session").classList.remove("d-none")
+      }
+    })
+  }
+
+  function main(response) {
+    if (response.errorCode === 0) {
+      loggedIn(response)
+    } else {
+      document.querySelector(".no-session").classList.remove("d-none")
+    }
+  }
+
+  function loggedIn(response) {
+    if (response.UID) {
+      const pre = document.getElementById('user-info')
+      pre.innerHTML = JSON.stringify(response.profile, null, 2)
+      document.querySelector(".logged-in").classList.remove("d-none")
+      document.querySelector(".no-session").classList.add("d-none")
+    }
+  }
+
+
 </script>
