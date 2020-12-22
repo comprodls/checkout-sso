@@ -1,5 +1,5 @@
 <script type="text/javascript"
-  src="https://cdns.gigya.com/js/gigya.js?apiKey=3_1vToYYw9suF1Gfm5VX9uNURUj6IMqRQq1_3YLsxOXx9vmUSkQQrndcLkYr4CIxYd">
+  src="https://cdns.gigya.com/js/gigya.js?apiKey=3_iOvCUCkHRux9zr7qZkSphbz6v1ox_PSh5H0dgD_-BKg9o14bIHEtCHemzZpY2DLn">
 </script>
 
 <div class="mt-4">
@@ -21,7 +21,7 @@
     var newNonce = Math.random() * 1000;
     // https://openid.qa.sso.cambridge.org/oidc/op/v1.0/3_H1l5oAZovYR72SpJuqq3US0WyzJyWBKEB8PasZUEBN1t7ESpbdM6pFND3Y8BRmit;
 
-    var authorizeEndpointLink = "https://openid.dev.sso.cambridge.org/oidc/op/v1.0/3_g0VqF7c6mmN3KYJCiEMdJOLF_lKb3h0qiXK6Uf1P17tLrbXpfY-P7ayDwBPIdFNR/authorize?client_id=lcCkTux5TS-3K8eC7zWR6zl&response_type=code&redirect_uri=https://cambridge-checkout.comprodls.com/&scope=openid%20email%20profile&nonce=" + newNonce;
+    var authorizeEndpointLink = "https://openid.qa.sso.cambridge.org/oidc/op/v1.0/3_H1l5oAZovYR72SpJuqq3US0WyzJyWBKEB8PasZUEBN1t7ESpbdM6pFND3Y8BRmit/authorize?client_id=3IXNoM2b2SXE-Trwe284aKwZ&response_type=code&redirect_uri=https://cambridge-checkout.comprodls.com&scope=openid%20email%20profile&nonce=" + newNonce;
 
     window.location.href = authorizeEndpointLink;
   }
