@@ -28,6 +28,7 @@
 
   function onGigyaServiceReady() {
     gigya.accounts.getAccountInfo({
+      include: 'identities-active,loginIDs,profile,data,id_token',
       callback: main
     })
     gigya.accounts.addEventHandlers({
