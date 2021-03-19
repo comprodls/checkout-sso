@@ -18,11 +18,14 @@
 <script>
   function login() {
     //window.location.href = "https://proxy.qa.internal.sso.cambridge.org/login";
+    /*
     var newNonce = Math.random() * 1000;
 
     var authorizeEndpointLink = "https://openid.dev.sso.cambridge.org/oidc/op/v1.0/3_g0VqF7c6mmN3KYJCiEMdJOLF_lKb3h0qiXK6Uf1P17tLrbXpfY-P7ayDwBPIdFNR/authorize?client_id=-lcCkTux5TS-3K8eC7zWR6zl&response_type=code&redirect_uri=https://cambridge-checkout.comprodls.com/&scope=openid%20email%20profile&nonce=" + newNonce;
 
     window.location.href = authorizeEndpointLink;
+    */
+    gigya.accounts.login();
   }
 
 
